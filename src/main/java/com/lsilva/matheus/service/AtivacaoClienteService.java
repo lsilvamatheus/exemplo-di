@@ -1,14 +1,17 @@
 package com.lsilva.matheus.service;
 
 import com.lsilva.matheus.modelo.Cliente;
-import com.lsilva.matheus.notificacao.NotificadorEmail;
-import com.lsilva.matheus.notificacao.NotificadorSMS;
+import com.lsilva.matheus.notificacao.Notificador;
 
 public class AtivacaoClienteService {
+    private final Notificador notificador;
+
+    public AtivacaoClienteService(Notificador notificador) {
+        this.notificador = notificador;
+    }
 
     public void ativar(Cliente cliente) {
         cliente.ativar();
-        NotificadorSMS notificador = new NotificadorSMS();
-        notificador.notificar(cliente, "Seu cadastro no sistema está ativo!");
+        this.notificador.notificar(cliente, "Seu cadastro no sistema está ativo!");
     }
 }
